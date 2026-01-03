@@ -1,20 +1,17 @@
 {
 	"name": "proof-of-build",
+	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite build && wrangler pages dev",
-		"deploy": "npm run build && wrangler pages deploy",
-		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
-	},
-	"dependencies": {
-		"hono": "^4.11.3"
+		"pages:dev": "cd apps/pages && npm run dev",
+		"pages:build": "cd apps/pages && npm run build",
+		"pages:deploy": "cd apps/pages && npm run deploy",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check --write .",
+		"fix": "biome check --write ."
 	},
 	"devDependencies": {
-		"@hono/vite-build": "^1.2.0",
-		"@hono/vite-dev-server": "^0.18.2",
-		"vite": "^6.3.5",
-		"wrangler": "^4.54.0"
+		"@biomejs/biome": "2.3.10"
 	}
 }

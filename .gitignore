@@ -31,7 +31,21 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+*.tsbuildinfo
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build outputs
+dist/
+build/
+*.tgz
 
 .dev.vars*
 !.dev.vars.example
 !.env.example
+package-lock.json

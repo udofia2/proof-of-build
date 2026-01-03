@@ -1,18 +1,26 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "skipLibCheck": true,
-    "lib": [
-      "ESNext"
-    ],
-    "types": [
-        "./worker-configuration.d.ts",
-        "vite/client"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
-  },
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"strict": true,
+		"skipLibCheck": true,
+		"lib": ["ESNext"],
+		"types": [],
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"composite": true,
+		"baseUrl": ".",
+		"paths": {
+			"@proof-of-build/core": ["./packages/core/src"],
+			"@proof-of-build/schemas": ["./packages/schemas/src"],
+			"@proof-of-build/adapters": ["./packages/adapters/src"],
+			"@proof-of-build/prompts": ["./packages/prompts/src"]
+		}
+	},
+	"include": ["packages/**/*", "apps/**/*"],
+	"exclude": ["node_modules", "dist"]
 }
