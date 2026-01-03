@@ -1,0 +1,23 @@
+{
+	"name": "@proof-of-build/cli",
+	"version": "0.1.0",
+	"type": "module",
+	"bin": {
+		"proof-of-build": "./src/index.js"
+	},
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsx src/index.ts"
+	},
+	"dependencies": {
+		"@proof-of-build/core": "file:../../packages/core",
+		"@proof-of-build/schemas": "file:../../packages/schemas",
+		"commander": "^12.1.0",
+		"zod": "^3.24.1"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.2",
+		"typescript": "^5.5.4",
+		"tsx": "^4.19.3"
+	}
+}

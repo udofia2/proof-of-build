@@ -11,6 +11,10 @@ dist/
 .idea/usage.statistics.xml
 .idea/shelf
 
+IMPLEMENTATION_PLAN.md
+ARCHITECTURE.md
+cloudflarePages.md
+
 # deps
 node_modules/
 .wrangler
@@ -49,3 +53,5 @@ build/
 !.dev.vars.example
 !.env.example
 package-lock.json
+
+docs/

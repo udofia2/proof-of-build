@@ -1,0 +1,91 @@
+# Cloudflare Worker Configuration for Proof-of-Build Orchestrator
+# This is a template - copy to apps/worker/wrangler.toml and customize
+
+name = "proof-of-build-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Queue Consumer Configuration
+# The Worker consumes messages from the queue triggered by R2 event notifications
+[[queues.consumers]]
+queue = "proof-of-build-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+dead_letter_queue = "proof-of-build-queue-dlq"  # Optional: for failed messages
+
+# R2 Bucket Bindings
+# All buckets use the same physical bucket (proof-of-build-uploads)
+# but are logically separated by directory structure
+
+[[r2_buckets]]
+binding = "UPLOADS_BUCKET"
+bucket_name = "proof-of-build-uploads"
+# Used for: Reading artifacts (frames, terminal, logs, manifest.json)
+
+[[r2_buckets]]
+binding = "SCRIPTS_BUCKET"
+bucket_name = "proof-of-build-uploads"
+# Used for: Writing generated scripts (scripts/{project_id}.json)
+
+[[r2_buckets]]
+binding = "AUDIO_BUCKET"
+bucket_name = "proof-of-build-uploads"
+# Used for: Writing generated audio (audio/{project_id}.m4a)
+
+[[r2_buckets]]
+binding = "STATE_BUCKET"
+bucket_name = "proof-of-build-uploads"
+# Used for: Reading/writing state files (state/{project_id}.json)
+
+# Environment Variables
+# These should be set via: wrangler secret put <KEY>
+[vars]
+# No public variables - all secrets use wrangler secret put
+
+# Secrets (set via: wrangler secret put <KEY>)
+# ELEVENLABS_API_KEY - API key for ElevenLabs audio generation
+# AI_API_KEY - API key for AI script generation (if using external AI)
+
+# Development Configuration
+[env.development]
+name = "proof-of-build-worker-dev"
+
+[env.production]
+name = "proof-of-build-worker"
+
+---
+
+## Binding Usage in Code
+
+```typescript
+// In apps/worker/src/index.ts
+export default {
+  async queue(batch: MessageBatch<QueueMessage>, env: Env): Promise<void> {
+    // Access R2 buckets via bindings
+    const uploads = env.UPLOADS_BUCKET;
+    const scripts = env.SCRIPTS_BUCKET;
+    const audio = env.AUDIO_BUCKET;
+    const state = env.STATE_BUCKET;
+    
+    // Access secrets
+    const elevenLabsKey = env.ELEVENLABS_API_KEY;
+    const aiKey = env.AI_API_KEY;
+  }
+}
+```
+
+## Setup Instructions
+
+1. Copy this file to `apps/worker/wrangler.toml`
+2. Create the R2 bucket: `wrangler r2 bucket create proof-of-build-uploads`
+3. Create the queue: `wrangler queues create proof-of-build-queue`
+4. Create event notification: `wrangler r2 bucket notification create proof-of-build-uploads --event-type object-create --queue proof-of-build-queue --suffix manifest.json`
+5. Set secrets: `wrangler secret put ELEVENLABS_API_KEY` (and AI_API_KEY if needed)
+
+---
+
+**See Also:**
+- `ARCHITECTURE.md` Section 3 (R2 Bucket Layout)
+- `IMPLEMENTATION_PLAN.md` Phase 2 & Phase 3
+
