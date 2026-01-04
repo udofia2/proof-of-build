@@ -70,29 +70,6 @@ cd apps/pages && npm run dev
 
 Visit `http://localhost:8788`
 
----
-
-## Project Structure
-
-```
-proof-of-build/
-├── apps/
-│   ├── cli/          # CLI tool for artifact upload
-│   ├── pages/        # Playback UI (Hono on Cloudflare Pages)
-│   └── worker/       # Pipeline orchestration (Cloudflare Worker)
-├── packages/
-│   ├── core/         # Pure domain logic (no Cloudflare APIs)
-│   ├── adapters/     # External service integrations
-│   ├── prompts/      # Versioned AI prompts
-│   └── schemas/      # Zod schemas
-├── infra/
-│   ├── wrangler/     # Wrangler configuration
-│   └── r2/           # R2 bucket configuration
-└── docs/
-    ├── ARCHITECTURE.md
-    ├── IMPLEMENTATION_PLAN.md
-    └── DECISIONS.md
-```
 
 ---
 
@@ -137,35 +114,4 @@ npm run dev      # Local development
 npm run deploy   # Deploy to Cloudflare Workers
 ```
 
----
 
-## Implementation Status
-
-- ✅ Phase 0: Foundation & Repository Setup
-- ✅ Phase 0.1: Repository structure
-- ✅ Phase 0.2: Core schemas (Zod)
-- ✅ Phase 0.3: Core domain logic
-- ⏳ Phase 0.4: Development tooling
-- ⏳ Phase 1: CLI & Local Ingestion
-- ⏳ Phase 2: Infrastructure Setup
-- ⏳ Phase 3: Worker Orchestration
-- ⏳ Phase 4: AI & Audio Generation
-- ⏳ Phase 5: Playback UI
-- ⏳ Phase 6: Integration & Testing
-
-See [`IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) for detailed phase-by-phase guide.
-
----
-
-## Documentation
-
-- [`ARCHITECTURE.md`](./docs/ARCHITECTURE.md) - System architecture and design principles
-- [`IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) - Step-by-step implementation guide
-- [`cloudflarePages.md`](./cloudflarePages.md) - Cloudflare Pages setup guide
-- [`docs/DECISIONS.md`](./docs/DECISIONS.md) - Architectural Decision Records
-
----
-
-## License
-
-MIT
