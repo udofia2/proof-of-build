@@ -71,6 +71,7 @@ cd apps/pages && npm run dev
 Visit `http://localhost:8788`
 
 
+
 ---
 
 ## Development
@@ -84,7 +85,7 @@ npm run build    # Build for production
 npm run deploy   # Deploy to Cloudflare Pages
 ```
 
-### CLI (Phase 1)
+### CLI
 
 ```bash
 cd apps/cli
@@ -106,43 +107,10 @@ npm run dev -- upload --project <project-id> --frames ./screenshots --terminal .
 npm run dev -- manifest --project <project-id>
 ```
 
-### Worker (Phase 3+)
+### Worker
 
 ```bash
 cd apps/worker
 npm run dev      # Local development
 npm run deploy   # Deploy to Cloudflare Workers
 ```
-
----
-
-## Implementation Status
-
-- ✅ Phase 0: Foundation & Repository Setup
-- ✅ Phase 0.1: Repository structure
-- ✅ Phase 0.2: Core schemas (Zod)
-- ✅ Phase 0.3: Core domain logic
-- ⏳ Phase 0.4: Development tooling
-- ⏳ Phase 1: CLI & Local Ingestion
-- ⏳ Phase 2: Infrastructure Setup
-- ⏳ Phase 3: Worker Orchestration
-- ⏳ Phase 4: AI & Audio Generation
-- ⏳ Phase 5: Playback UI
-- ⏳ Phase 6: Integration & Testing
-
-See [`IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) for detailed phase-by-phase guide.
-
----
-
-## Documentation
-
-- [`ARCHITECTURE.md`](./docs/ARCHITECTURE.md) - System architecture and design principles
-- [`IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) - Step-by-step implementation guide
-- [`cloudflarePages.md`](./cloudflarePages.md) - Cloudflare Pages setup guide
-- [`docs/DECISIONS.md`](./docs/DECISIONS.md) - Architectural Decision Records
-
----
-
-## License
-
-MIT
