@@ -4,8 +4,6 @@
 
 Proof-of-Build transforms screenshots, terminal output, and logs into shareable video demos with AI-generated narration.
 
----
-
 ## Architecture
 
 This is a monorepo with three main applications:
@@ -14,9 +12,6 @@ This is a monorepo with three main applications:
 - **`apps/worker/`** - Cloudflare Worker that orchestrates the processing pipeline
 - **`apps/pages/`** - Cloudflare Pages (Hono) for playback UI
 
-See [`ARCHITECTURE.md`](./docs/ARCHITECTURE.md) for detailed architecture documentation.
-
----
 
 ## Quick Start
 
@@ -71,9 +66,6 @@ cd apps/pages && npm run dev
 Visit `http://localhost:8788`
 
 
-
----
-
 ## Development
 
 ### Pages App
@@ -114,3 +106,4 @@ cd apps/worker
 npm run dev      # Local development
 npm run deploy   # Deploy to Cloudflare Workers
 ```
+
