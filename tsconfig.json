@@ -18,6 +18,8 @@
 			"@proof-of-build/core": ["./packages/core/src"],
 			"@proof-of-build/schemas": ["./packages/schemas/src"],
 			"@proof-of-build/adapters": ["./packages/adapters/src"],
+			"@proof-of-build/adapters-ai": ["./packages/adapters/ai/src"],
+			"@proof-of-build/adapters-elevenlabs": ["./packages/adapters/elevenlabs/src"],
 			"@proof-of-build/prompts": ["./packages/prompts/src"]
 		}
 	},

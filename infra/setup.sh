@@ -1,6 +1,9 @@
 #!/bin/bash
 # Infrastructure Setup Script for Proof-of-Build
 # Run this script to set up R2 bucket, queue, and event notifications
+# 
+# TEMPORARY: Using polling worker instead of queues (free tier)
+# TODO: After 2 weeks, uncomment queue implementation and comment out polling
 
 set -e  # Exit on error
 
@@ -37,36 +40,45 @@ else
     echo "   ✅ Bucket '$BUCKET_NAME' created"
 fi
 
-echo ""
-echo "📬 Step 2: Creating queue..."
-if wrangler queues list | grep -q "$QUEUE_NAME"; then
-    echo "   ✅ Queue '$QUEUE_NAME' already exists"
-else
-    wrangler queues create "$QUEUE_NAME"
-    echo "   ✅ Queue '$QUEUE_NAME' created"
-fi
-
-echo ""
-echo "🔔 Step 3: Creating event notification..."
-# Check if notification already exists
-NOTIFICATIONS=$(wrangler r2 bucket notification list "$BUCKET_NAME" 2>/dev/null || echo "")
-if echo "$NOTIFICATIONS" | grep -q "manifest.json"; then
-    echo "   ✅ Event notification already exists (triggers on manifest.json)"
-else
-    wrangler r2 bucket notification create "$BUCKET_NAME" \
-        --event-type object-create \
-        --queue "$QUEUE_NAME" \
-        --suffix manifest.json
-    echo "   ✅ Event notification created (triggers on manifest.json uploads)"
-fi
+# ============================================================================
+# QUEUE IMPLEMENTATION (COMMENTED OUT - REQUIRES PAID PLAN)
+# TODO: Uncomment after moving to paid plan (in ~2 weeks)
+# ============================================================================
+# echo ""
+# echo "📬 Step 2: Creating queue..."
+# if wrangler queues list | grep -q "$QUEUE_NAME"; then
+#     echo "   ✅ Queue '$QUEUE_NAME' already exists"
+# else
+#     wrangler queues create "$QUEUE_NAME"
+#     echo "   ✅ Queue '$QUEUE_NAME' created"
+# fi
+# 
+# echo ""
+# echo "🔔 Step 3: Creating event notification..."
+# # Check if notification already exists
+# NOTIFICATIONS=$(wrangler r2 bucket notification list "$BUCKET_NAME" 2>/dev/null || echo "")
+# if echo "$NOTIFICATIONS" | grep -q "manifest.json"; then
+#     echo "   ✅ Event notification already exists (triggers on manifest.json)"
+# else
+#     wrangler r2 bucket notification create "$BUCKET_NAME" \
+#         --event-type object-create \
+#         --queue "$QUEUE_NAME" \
+#         --suffix manifest.json
+#     echo "   ✅ Event notification created (triggers on manifest.json uploads)"
+# fi
+# ============================================================================
 
 echo ""
 echo "✅ Infrastructure setup complete!"
 echo ""
 echo "📋 Summary:"
 echo "   - R2 Bucket: $BUCKET_NAME"
-echo "   - Queue: $QUEUE_NAME"
-echo "   - Event Notification: Triggers on uploads/{project_id}/manifest.json"
+echo "   - Queue: [SKIPPED - Using polling worker instead]"
+echo "   - Event Notification: [SKIPPED - Using polling worker instead]"
+echo "   - Worker: Will poll R2 for new manifest.json files (cron trigger)"
+echo ""
+echo "💡 Note: Currently using polling worker (free tier)."
+echo "   Queue implementation is commented out and will be enabled after moving to paid plan."
 echo ""
 echo "🔐 Next steps:"
 echo "   1. Set secrets (when ready):"

@@ -1,0 +1,22 @@
+{
+	"name": "@proof-of-build/worker",
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy"
+	},
+	"dependencies": {
+		"@proof-of-build/core": "file:../../packages/core",
+		"@proof-of-build/schemas": "file:../../packages/schemas",
+		"@proof-of-build/adapters-ai": "file:../../packages/adapters/ai",
+		"@proof-of-build/adapters-elevenlabs": "file:../../packages/adapters/elevenlabs"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20241106.0",
+		"typescript": "^5.5.4",
+		"wrangler": "^3.0.0"
+	}
+}
+

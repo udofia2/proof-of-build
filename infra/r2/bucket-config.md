@@ -42,9 +42,17 @@ proof-of-build-uploads/
 
 ## Event Notifications
 
+**Status:** ⚠️ **TEMPORARY: COMMENTED OUT** - Using polling worker instead (free tier)
+
+**Original Configuration (when moving to paid plan):**
 - **Trigger**: `object-create` events on `uploads/{project_id}/manifest.json`
 - **Target**: `proof-of-build-queue`
 - **Filter**: `--suffix manifest.json` (only triggers on manifest.json uploads)
+
+**Current Implementation (temporary):**
+- **Method**: Polling via cron trigger (every 2 minutes)
+- **Worker**: Scans `uploads/*/manifest.json` files
+- **Tracking**: Uses `state/{project_id}.json` to track processed projects
 
 ## Lifecycle Policies
 

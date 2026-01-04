@@ -56,6 +56,11 @@ binding = "STATE_BUCKET"
 bucket_name = "proof-of-build-uploads"
 # Used for: Reading/writing state files (state/{project_id}.json)
 
+# AI Binding (Workers AI)
+[ai]
+binding = "AI"
+# Used for: Script generation using Cloudflare Workers AI
+
 # Environment Variables
 # These should be set via: wrangler secret put <KEY>
 [vars]
@@ -112,15 +117,10 @@ name = "proof-of-build-worker"
 # ============================================================================
 # 
 # SETUP INSTRUCTIONS:
-# 1. Copy this file to apps/worker/wrangler.toml
-# 2. Create the R2 bucket: wrangler r2 bucket create proof-of-build-uploads
-# 3. Set secrets: wrangler secret put ELEVENLABS_API_KEY (and AI_API_KEY if needed)
-# 4. Deploy worker: wrangler deploy (cron trigger will be automatically configured)
+# 1. Create the R2 bucket: wrangler r2 bucket create proof-of-build-uploads
+# 2. Set secrets: wrangler secret put ELEVENLABS_API_KEY (and AI_API_KEY if needed)
+# 3. Deploy worker: wrangler deploy (cron trigger will be automatically configured)
 # 
 # Note: Queue and event notification setup is skipped (using polling instead)
 # See infra/README.md for more details
-# 
-# See Also:
-# - ARCHITECTURE.md Section 3 (R2 Bucket Layout)
-# - IMPLEMENTATION_PLAN.md Phase 2 & Phase 3
 

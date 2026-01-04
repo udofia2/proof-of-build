@@ -1,0 +1,7 @@
+# Example .dev.vars file for Pages local development
+# Copy this to .dev.vars and fill in your actual values
+# DO NOT commit .dev.vars to git (it's in .gitignore)
+
+# Add any environment variables needed for Pages app here
+# (Currently, Pages app is read-only and doesn't need secrets)
+
